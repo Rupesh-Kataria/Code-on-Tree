@@ -1,0 +1,38 @@
+Given a binary tree, return the preorder traversal of its nodes’ values
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+vector<int> Solution::preorderTraversal(TreeNode* A) {
+    stack<TreeNode*>s;
+    vector<int>v;
+    TreeNode* curr=A;
+    while(curr)
+    {
+        v.push_back(curr->val);
+        s.push(curr);
+        curr=curr->left;
+    }
+    while(!s.empty())
+    {
+        TreeNode* temp=s.top();
+        s.pop();
+        if(temp->right)
+        {
+            curr=temp->right;
+            while(curr)
+            {
+                v.push_back(curr->val);
+                s.push(curr);
+                curr=curr->left;
+            }
+        }
+    }
+    return v;
+}
